@@ -1,4 +1,4 @@
-Exceptional
+Exceptional [on nuget](https://www.nuget.org/packages/Weingartner.Exceptional)
 ===========
 
 Exceptional is a LINQ compatible error handling monad. Sometimes errors should be carried around like data rather than letting them bubble up as exception. 
@@ -58,7 +58,7 @@ The following tests cases show some use cases.
         
     }
 
-IObservableExceptional
+IObservableExceptional [on nuget](https://www.nuget.org/packages/Weingartner.Exceptional)
 ======================
 
 Reactive extensions has a big problem when using it for user interface programming. Exceptions terminate subscriptions. The
