@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionalSpec.cs" />
-    <Compile Include="IObservableExceptionalSpec.cs" />
+    <Compile Include="ObservableExceptionalExtensionslSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

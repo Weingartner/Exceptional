@@ -2,7 +2,7 @@ using System;
 
 namespace Weingartner.Exceptional
 {
-    public static class ExceptionalMonadExtensions
+    public static class ExceptionalLinq
     {
         public static IExceptional<T> ToExceptional<T>(this T value)
         {

@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using FluentAssertions;
 using ReactiveUI;
+using Weingartner.Exceptional.Reactive;
 using Xunit;
 
 namespace Weingartner.Exceptional.Spec
@@ -35,7 +36,7 @@ namespace Weingartner.Exceptional.Spec
         
     }
 
-    public class IObservableExceptionalSpec
+    public class ObservableExceptionalExtensionslSpec
     {
 
         [Fact]
