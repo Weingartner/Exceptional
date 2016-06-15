@@ -28,7 +28,7 @@
 
     }
 
-    internal class Exceptional<T> : ExceptionalBase, IExceptional<T>
+    public class Exceptional<T> : ExceptionalBase, IExceptional<T>
     {
         public bool Equals(IExceptional<T> other)
         {

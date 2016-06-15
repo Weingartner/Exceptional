@@ -67,6 +67,7 @@
     <Compile Include="ExceptionalExtensions.cs" />
     <Compile Include="ExceptionalMonadExtensions.cs" />
     <Compile Include="IExceptional.cs" />
+    <Compile Include="IObservableExceptional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
