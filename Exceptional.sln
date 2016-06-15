@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional", "Exceptional\Exceptional.csproj", "{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Spec", "Exceptional.Spec\Exceptional.Spec.csproj", "{AD341B78-7F03-44D3-BF88-4BABA2B5469D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
