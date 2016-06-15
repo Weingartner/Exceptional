@@ -32,6 +32,7 @@ namespace Weingartner.Exceptional
                 fn(e.Exception);
             }
         }
+        public static T IfErrorUnsafe<T>(this IExceptional<T> e,Func<Exception, T> fn) => e.HasException ? fn(e.Exception) : e.Value;
 
         /// <summary>
         /// If any of the internal exceptional have an error then the output exceptional is in error.

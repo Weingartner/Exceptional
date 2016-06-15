@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Reactive;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using static Weingartner.Exceptional.ObservableExceptional;
 
 namespace Weingartner.Exceptional
 {
@@ -37,7 +28,7 @@ namespace Weingartner.Exceptional
 
         public ObservableExceptional(IObservable<T> inner)
         {
-            Observable = inner.Select(Exceptional.Ok);
+            Observable = inner.Select<T, IExceptional<T>>(Exceptional.Ok);
         }
         public ObservableExceptional(IObservable<IExceptional<T>> inner)
         {
@@ -132,14 +123,13 @@ namespace Weingartner.Exceptional
             if (fn == null)
                 throw new ArgumentNullException(nameof(fn));
 
-            var oU =
-                from ve in o.Observable
-                from v in ve
-                from qe in fn(v).Observable
-                select qe;
+            return o.Observable.SelectMany
+                (te => te.Select(fn).IfErrorUnsafe(Fail<TU>).Observable).ToObservableExceptional();
 
-            return oU.ToObservableExceptional();
         }
+
+        public static IObservableExceptional<T> Do<T>(this IObservableExceptional<T> o, Action<IExceptional<T>> fn) =>
+            o.Observable.Do(fn).ToObservableExceptional();
 
 
         public static IObservableExceptional<V> SelectMany<T, U, V>(this IObservableExceptional<T> o, Func<T, IObservableExceptional<U>> fn0, Func<T, U, V> fn1)
@@ -151,13 +141,14 @@ namespace Weingartner.Exceptional
             if (fn1 == null)
                 throw new ArgumentNullException(nameof(fn1));
 
-            var r = 
-                from ve in o.Observable
-                from v in ve
-                from qe in fn0(v).Observable
-                select (qe.Select(u=>fn1(v,u)));
 
-            return r.ToObservableExceptional();
+            return o
+                .Observable
+                .SelectMany
+                    ( te => te.Select(fn0).Flatten().Observable
+                    , (te,ue)=> te.SelectMany(t => ue, fn1)
+                    )
+                .ToObservableExceptional();
 
         }
 
@@ -166,14 +157,16 @@ namespace Weingartner.Exceptional
             if (o == null)
                 throw new ArgumentNullException(nameof(o));
 
-            var o2 =
-                o
-                    .Observable
-                    .Select(v => (v.HasException ? Fail<T>(v.Exception) : v.Value).Observable)
-                    .Switch()
-                    .ToObservableExceptional();
+            return o
+                .Observable
+                .Select(v => v.Flatten().Observable)
+                .Switch()
+                .ToObservableExceptional();
+        }
 
-            return o2;
+        private static IObservableExceptional<T> Flatten<T>(this IExceptional<IObservableExceptional<T>> v)
+        {
+            return v.HasException ? Fail<T>(v.Exception) : v.Value;
         }
     }
 }

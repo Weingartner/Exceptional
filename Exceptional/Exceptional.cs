@@ -114,16 +114,11 @@
             }
         }
 
+
         // Returns the exception message if it exists or an empty string
         public string ToMessage()
         {
             return this.HasException ? Exception.Message : "";
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            if (!HasException)
-                yield return Value;
         }
 
         public override string ToString()
@@ -131,10 +126,6 @@
             return (this.HasException ? Exception.GetType().Name : ((Value != null) ? Value.ToString() : "null"));
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
 
         public void ThrowIfHasException()
         {
