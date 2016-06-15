@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\TaskExtensions.cs" />
     <Compile Include="Exceptional.Combine.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -17,7 +17,7 @@ namespace Weingartner.Exceptional.Reactive
                 throw new ArgumentNullException(nameof(fn));
 
             return o.Observable.SelectMany
-                (te => te.Select<TR, IObservableExceptional<TU>>(fn).IfErrorUnsafe(ObservableExceptionalExtensions.Fail<TU>).Observable).ToObservableExceptional();
+                (te => te.Select<TR, IObservableExceptional<TU>>(fn).IfErrorUnsafe(ObservableExceptional.Fail<TU>).Observable).ToObservableExceptional();
 
         }
 
@@ -67,7 +67,7 @@ namespace Weingartner.Exceptional.Reactive
 
         private static IObservableExceptional<T> Flatten<T>(this IExceptional<IObservableExceptional<T>> v)
         {
-            return v.HasException ? ObservableExceptionalExtensions.Fail<T>(v.Exception) : v.Value;
+            return v.HasException ? ObservableExceptional.Fail<T>(v.Exception) : v.Value;
         }
     }
 }
