@@ -12,14 +12,15 @@
 
     public static partial class Exceptional
     {
-        public static IExceptional<T> Failure<T>(Exception e)
-        {
-            return new Exceptional<T>(e);
-        }
-        public static IExceptional<T> Success<T>(T t)
-        {
-            return new Exceptional<T>(t);
-        }
+        [Obsolete("Use Fail")]
+        public static IExceptional<T> Failure<T>(Exception e) => Fail<T>(e);
+        [Obsolete("Use Ok")]
+        public static IExceptional<T> Success<T>(T t) => Ok(t);
+
+        public static IExceptional<T> Ok<T>(T t) => new Exceptional<T>(t);
+        public static IExceptional<T> Fail<T>(Exception e) => new Exceptional<T>(e);
+        public static IExceptional<T> Fail<T>(string msg) => Fail<T>(new Exception(msg)) ;
+
         public static IExceptional<T> Create<T>(Func<T> fn)
         {
             return new Exceptional<T>(fn);

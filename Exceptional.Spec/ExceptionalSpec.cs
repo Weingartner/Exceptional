@@ -22,8 +22,8 @@ namespace Weingartner.Exceptional.Spec
         public void WhenMultipleInputsHaveExceptionTheyShouldBeAggregated()
         {
             var a = 1.ToExceptional();
-            var b = Exceptional.Failure<int>(new Exception("AAA"));
-            var c = Exceptional.Failure<int>(new Exception("BBB"));
+            var b = Exceptional.Fail<int>(new Exception("AAA"));
+            var c = Exceptional.Fail<int>(new Exception("BBB"));
 
             var r = Exceptional.Combine(a, b, c, (x, y, z) => x + y + z);
 
@@ -53,8 +53,8 @@ namespace Weingartner.Exceptional.Spec
         [Fact]
         public void LINQHappyPathShouldWork()
         {
-            var xa = Exceptional.Success(1);
-            var xb = Exceptional.Success(2);
+            var xa = Exceptional.Ok(1);
+            var xb = Exceptional.Ok(2);
 
             var xx =
                 from a in xa
@@ -70,8 +70,8 @@ namespace Weingartner.Exceptional.Spec
         [Fact]
         public void LINQSadPathShouldWork()
         {
-            var xa = Exceptional.Success(1);
-            var xb = Exceptional.Failure<int>(new Exception("foo"));
+            var xa = Exceptional.Ok(1);
+            var xb = Exceptional.Fail<int>(new Exception("foo"));
 
             var xx =
                 from a in xa
