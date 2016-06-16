@@ -68,10 +68,7 @@ namespace Weingartner.Exceptional.Reactive
 
     internal class ObservableExceptional<T> : IObservableExceptional<T>
     {
-        public void Subscribe(IObserverExceptional<T> observer)
-        {
-            Observable.Subscribe(observer.Observer);
-        }
+        public IDisposable Subscribe(IObserverExceptional<T> observer) => Observable.Subscribe(observer.Observer);
 
         public IObservable<IExceptional<T>> Observable { get; }
 

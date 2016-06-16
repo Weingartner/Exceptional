@@ -6,7 +6,7 @@ namespace Weingartner.Exceptional.Reactive
     public static class ObservableExceptionalExtensions
     {
 
-        public static void Subscribe<T>
+        public static IDisposable Subscribe<T>
             (this IObservableExceptional<T> o,
                 Action<T> onNext,
                 Action<Exception> onError = null,
