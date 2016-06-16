@@ -16,6 +16,17 @@ using Weingartner.Exceptional.Reactive;
 namespace Weingartner.Exceptional.Reactive {
     public  static partial class ReactiveUI {
 
+
+
+	/// <Summary>
+	/// Any exceptions in the selector are wrapped and do not terminate the sequence
+	/// </Summary>
+    public static IObservableExceptional<T1> WhenAnyExceptional<TSender, T1>
+        ( this TSender sender, Expression<Func<TSender,T1>> x1 )
+    {
+		return sender.WhenAnyValue(x1).ToObservableExceptional();
+    }
+
     <#foreach(int i in Enumerable.Range(1,12))
     {
 		string typeArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => "T" + v.ToString() ));
@@ -33,6 +44,13 @@ namespace Weingartner.Exceptional.Reactive {
     {
 		return sender.WhenAnyValue(<#=fnArgs#>, (<#=fnArgs2#>) => Exceptional.Execute(()=>fn(<#=fnArgs2#>))).ToObservableExceptional();
     }
+
+	/// <Summary>
+	/// Shorter alias for WhenAnyExceptional
+	/// </Summary>
+    public static IObservableExceptional<TU> Spy<TSender, <#=typeArgs#>, TU>
+        ( this TSender sender, <#= args #>
+        , Func<<#=typeArgs#>, TU> fn) => sender.WhenAnyExceptional(<#=fnArgs#>, fn);
 
     <#}#>
 
