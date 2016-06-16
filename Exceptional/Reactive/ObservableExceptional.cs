@@ -11,9 +11,23 @@ namespace Weingartner.Exceptional.Reactive
 {
     public static class ObservableExceptional
     {
+
+        /// <summary>
+        /// Convert a normal observable to an IObservableExceptional. This is UNSAFE
+        /// as it assumes that the inner will never throw an exception and terminate.
+        /// </summary>
+        /// <param name="o">Must never cause an onError callback on it's observer</param>
         public static IObservableExceptional<T> Create<T>(IObservable<T> o )=> new ObservableExceptional<T>(o);
         public static IObservableExceptional<T> Create<T>(IObservable<IExceptional<T>> o )=> new ObservableExceptional<T>(o);
-        public static IObservableExceptional<T> Return<T>(T o) => Create(Observable.Return(o));
+
+        public static IObservableExceptional<T> Return<T>(T o) => Create(Observable.Return(Exceptional.Ok(o)));
+        /// <summary>
+        /// A synonym for Return but 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static IObservableExceptional<T> Ok<T>(T o) => Return(o);
         public static IObservableExceptional<T> Fail<T>(Exception e) => Create(Observable.Return(Exceptional.Fail<T>(e)));
         public static IObservableExceptional<T> Empty<T>() => Create(Observable.Empty<T>());
 
@@ -61,9 +75,14 @@ namespace Weingartner.Exceptional.Reactive
 
         public IObservable<IExceptional<T>> Observable { get; }
 
+        /// <summary>
+        /// Convert a normal observable to an IObservableExceptional. This is UNSAFE
+        /// as it assumes that the inner will never throw an exception and terminate.
+        /// </summary>
+        /// <param name="inner">Must never cause an onError callback on it's observer</param>
         public ObservableExceptional(IObservable<T> inner)
         {
-            Observable = inner.Select<T, IExceptional<T>>(Exceptional.Ok);
+            Observable = inner.Select(Exceptional.Ok);
         }
         public ObservableExceptional(IObservable<IExceptional<T>> inner)
         {
