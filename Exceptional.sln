@@ -9,8 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.Spec", "Excepti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0DBDD32-E634-42FA-AF96-7E0EC0D0FA73}"
 	ProjectSection(SolutionItems) = preProject
+		nuget-build.ps1 = nuget-build.ps1
 		readme.md = readme.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptional.ReactiveUI", "Exceptional.ReactiveUI\Exceptional.ReactiveUI.csproj", "{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +29,10 @@ Global
 		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD341B78-7F03-44D3-BF88-4BABA2B5469D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

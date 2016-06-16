@@ -9,9 +9,8 @@
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/Weingartner/Exceptional</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A LINQ compatible exception object.</description>
-    <releaseNotes>Enables you to carry a value or an exception through the code. The class is compatible with the .NET exception mechanism and will wrap thrown exceptions for you. This is
-    very helpfull when using RX and you don't want the Observer terminated because of an error but wish the error to be carried along as part of the data.</releaseNotes>
+    <description>A linq compatible exception object with ReactiveUI support</description>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>Reactive</tags>
   </metadata>

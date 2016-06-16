@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".generated.cs" #>
+
+using System;
+using System.Collections.Generic;
+using Weingartner.Exceptional;
+using System.Linq.Expressions;
+using ReactiveUI;
+using Weingartner.Exceptional.Reactive;
+
+namespace Weingartner.Exceptional.Reactve {
+    public  static partial class ReactiveUI {
+
+    <#foreach(int i in Enumerable.Range(1,12))
+    {
+		string typeArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => "T" + v.ToString() ));
+        string args     = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("Expression<Func<TSender,T{0}>> x{0}", v)));
+		string fnArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("x{0}", v )));
+		string fnArgs2 = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("t{0}", v )));
+    #>
+
+	/// <Summary>
+	/// Any exceptions in the selector are wrapped and do not terminate the sequence
+	/// </Summary>
+    public static IObservableExceptional<TU> WhenAnyExceptional<TSender, <#=typeArgs#>, TU>
+        ( this TSender sender, <#= args #>
+        , Func<<#=typeArgs#>, TU> fn)
+    {
+		return sender.WhenAnyValue(<#=fnArgs#>, (<#=fnArgs2#>) => Exceptional.Execute(()=>fn(<#=fnArgs2#>))).ToObservableExceptional();
+    }
+
+    <#}#>
+
+
+    }
+}
