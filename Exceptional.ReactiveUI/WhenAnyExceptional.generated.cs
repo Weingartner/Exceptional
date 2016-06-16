@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using ReactiveUI;
 using Weingartner.Exceptional.Reactive;
 
-namespace Weingartner.Exceptional.Reactve {
+namespace Weingartner.Exceptional.Reactive {
     public  static partial class ReactiveUI {
 
     
