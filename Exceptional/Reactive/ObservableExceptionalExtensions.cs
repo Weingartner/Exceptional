@@ -43,7 +43,7 @@ namespace Weingartner.Exceptional.Reactive
         public static IConnectableObservableExceptional<T> Publish<T>(this IObservableExceptional<T> o) => 
             new ConnectableObservableExceptional<T>(o.Observable.Publish());
 
-        public static IObservableExceptional<T> DistictUntilChanged<T>(this IObservableExceptional<T> o) => 
+        public static IObservableExceptional<T> DistinctUntilChanged<T>(this IObservableExceptional<T> o) => 
             o.Observable.DistinctUntilChanged().ToObservableExceptional();
 
         public static IObservableExceptional<T> Switch<T>(this IObservableExceptional<IObservableExceptional<T>> o )

@@ -229,7 +229,7 @@ namespace Weingartner.Exceptional.Spec
             var list = new List<int>();
             var elist = new List<Exception>();
 
-            s.DistictUntilChanged()
+            s.DistinctUntilChanged()
                 .Subscribe(v => list.Add(v), onError:e=>elist.Add(e));
 
             s.OnNext(0); 
