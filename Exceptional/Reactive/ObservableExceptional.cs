@@ -9,7 +9,7 @@ using Weingartner.Exceptional.Async;
 
 namespace Weingartner.Exceptional.Reactive
 {
-    public static class ObservableExceptional
+    public static partial class ObservableExceptional
     {
 
         /// <summary>

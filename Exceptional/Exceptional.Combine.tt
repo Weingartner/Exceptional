@@ -13,7 +13,7 @@ using Weingartner.Exceptional;
 namespace Weingartner.Exceptional {
     public  static partial class Exceptional {
 
-    <#foreach(int i in Enumerable.Range(1,8))
+    <#foreach(int i in Enumerable.Range(1,16))
     {
 		string typeArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => "T" + v.ToString() ));
         string args     = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("IExceptional<T{0}> t{0}", v)));

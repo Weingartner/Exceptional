@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using FluentAssertions;
@@ -256,6 +257,47 @@ namespace Weingartner.Exceptional.Spec
             elist.Count.Should().Be(1);
 
 
+        }
+
+
+        [Fact]
+        public void CombineLatestShouldWork()
+        {
+            var s0 = new BehaviorSubjectExceptional<int>(0);
+            var s1 = new BehaviorSubjectExceptional<int>(1);
+
+            var s3 = ObservableExceptional.CombineLatest(s0, s1, (a, b) => Tuple.Create(a, b));
+
+
+            var list = new List<Tuple<int,int>>();
+            var elist = new List<Exception>();
+
+            s3.Subscribe(v => list.Add(v), err => elist.Add(err));
+
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1));
+
+            s1.OnNext(5);
+
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1), Tuple.Create(0,5));
+
+            s1.OnError(new Exception("111"));
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1), Tuple.Create(0,5));
+            elist.Select(m=>m.Message).Should().BeEquivalentTo("111");
+
+            s0.OnError(new Exception("000"));
+
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1), Tuple.Create(0,5));
+            elist.Select(m=>m.Message).Should().BeEquivalentTo("111", "One or more errors occurred.");
+
+            s0.OnNext(10);
+
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1), Tuple.Create(0,5));
+            elist.Select(m=>m.Message).Should().BeEquivalentTo("111", "One or more errors occurred.", "111");
+
+            s1.OnNext(20);
+
+            list.Should().BeEquivalentTo(Tuple.Create(0, 1), Tuple.Create(0,5), Tuple.Create(10,20));
+            elist.Select(m=>m.Message).Should().BeEquivalentTo("111", "One or more errors occurred.", "111");
         }
 
 

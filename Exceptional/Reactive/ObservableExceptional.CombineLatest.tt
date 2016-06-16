@@ -1,0 +1,49 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".generated.cs" #>
+
+using System;
+using System.Collections.Generic;
+using Weingartner.Exceptional;
+using System.Reactive.Linq;
+using System.Reactive;
+
+namespace Weingartner.Exceptional.Reactive {
+    public static partial class ObservableExceptional {
+
+    <#foreach(int i in Enumerable.Range(2,15))
+    {
+		string typeArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => "T" + v.ToString() ));
+        string args     = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("IObservableExceptional<T{0}> t{0}", v)));
+		string fnArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => String.Format("t{0}.Value", v )));
+		string vArgs = String.Join(", ", Enumerable.Range(1, i).Select( v => "v" + v.ToString() ));
+    #>
+
+		/// <Summary>
+		/// If any of the inputs are in error then the output will contain an aggregate
+		/// exception of the inputs. If the selector function throws then the output will
+		/// contain that exception.
+		/// </Summary>
+		public static IObservableExceptional<TU> CombineLatest<<#=typeArgs#>, TU>
+			(this <#= args #>
+			, Func<<#=typeArgs#>, TU> fn)
+		{
+			return Observable.CombineLatest(
+			<# foreach(int j in Enumerable.Range(1,i)) { #>
+			t<#=j#>.Observable,
+			<#}#>
+			 (<#=vArgs#>)=>Exceptional.Combine(<#=vArgs#>,fn)
+			).ToObservableExceptional();
+
+		}
+
+    <#}#>
+
+
+	}
+
+}
