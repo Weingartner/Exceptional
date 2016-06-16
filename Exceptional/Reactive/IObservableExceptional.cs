@@ -2,7 +2,7 @@
 
 namespace Weingartner.Exceptional.Reactive
 {
-    public interface IObservableExceptional<T>
+    public interface IObservableExceptional<out T>
     {
         IDisposable Subscribe(IObserverExceptional<T> observer);
 

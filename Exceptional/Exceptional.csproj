@@ -69,12 +69,19 @@
     <Compile Include="ExceptionalLinq.cs" />
     <Compile Include="IExceptional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reactive\ConnectableObservableExceptional.cs" />
+    <Compile Include="Reactive\ConnectableObservableExceptionalExtensions.cs" />
+    <Compile Include="Reactive\IConnectableObservableExceptional.cs" />
     <Compile Include="Reactive\IObservableExceptional.cs" />
     <Compile Include="Reactive\IObserverExceptional.cs" />
     <Compile Include="Reactive\ObservableExceptional.cs" />
     <Compile Include="Reactive\ObservableExceptionalExtensions.cs" />
     <Compile Include="Reactive\ObservableExceptionalLinq.cs" />
     <Compile Include="Reactive\ObserverExceptional.cs" />
+    <Compile Include="Reactive\Subject\BehaviorSubjectExceptional.cs" />
+    <Compile Include="Reactive\Subject\ISubjectExceptional.cs" />
+    <Compile Include="Reactive\Subject\SubjectExceptional.cs" />
+    <Compile Include="Reactive\Subject\SubjectExceptionalBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

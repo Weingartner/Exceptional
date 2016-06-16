@@ -30,6 +30,11 @@
 
     public class Exceptional<T> : ExceptionalBase, IExceptional<T>
     {
+        protected bool Equals(Exceptional<T> other)
+        {
+            return EqualityComparer<T>.Default.Equals(_Value, other._Value) && HasException == other.HasException && Equals(Exception, other.Exception);
+        }
+
         public bool Equals(IExceptional<T> other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -46,20 +51,23 @@
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((IExceptional<T>)obj);
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != this.GetType())
+                return false;
+            return Equals((Exceptional<T>) obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                if (HasException)
-                    return ((Exception?.GetHashCode() ?? 0) * 397);
-
-                return EqualityComparer<T>.Default.GetHashCode(_Value);
+                var hashCode = EqualityComparer<T>.Default.GetHashCode(_Value);
+                hashCode = (hashCode*397) ^ HasException.GetHashCode();
+                hashCode = (hashCode*397) ^ (Exception?.GetHashCode() ?? 0);
+                return hashCode;
             }
         }
 

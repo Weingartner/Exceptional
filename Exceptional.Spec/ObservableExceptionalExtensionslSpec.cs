@@ -5,6 +5,7 @@ using System.Threading;
 using FluentAssertions;
 using ReactiveUI;
 using Weingartner.Exceptional.Reactive;
+using Weingartner.Exceptional.Reactive.Subject;
 using Xunit;
 
 namespace Weingartner.Exceptional.Spec
@@ -218,6 +219,44 @@ namespace Weingartner.Exceptional.Spec
 
         }
         #endregion
+
+        [Fact]
+        public void DistinctUntilChangedWillWork()
+        {
+            var s = new BehaviorSubjectExceptional<int>(0);
+
+
+            var list = new List<int>();
+            var elist = new List<Exception>();
+
+            s.DistictUntilChanged()
+                .Subscribe(v => list.Add(v), onError:e=>elist.Add(e));
+
+            s.OnNext(0); 
+            s.OnNext(1); 
+            s.OnNext(2);
+
+            list.Should().BeEquivalentTo(0, 1, 2);
+
+            s.OnNext(2);
+            s.OnNext(2);
+            s.OnNext(3);
+
+            list.Should().BeEquivalentTo(0, 1, 2, 3);
+
+            // Note that the error introduces a new event between the two 3's
+            // so that they are no longer distinct.
+            s.OnError(new Exception("Foo"));
+
+            s.OnNext(3);
+
+
+            list.Should().BeEquivalentTo(0, 1, 2, 3, 3);
+
+            elist.Count.Should().Be(1);
+
+
+        }
 
 
     }
