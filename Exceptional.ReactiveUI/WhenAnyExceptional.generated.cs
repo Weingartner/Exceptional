@@ -19,6 +19,8 @@ namespace Weingartner.Exceptional.Reactive {
     {
 		return sender.WhenAnyValue(x1).ToObservableExceptional();
     }
+    public static IObservableExceptional<T1> Spy<TSender, T1>
+        ( this TSender sender, Expression<Func<TSender,T1>> x1 ) => sender.WhenAnyExceptional(x1);
 
     
 	/// <Summary>
