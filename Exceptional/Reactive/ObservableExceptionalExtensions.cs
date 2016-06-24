@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 
 namespace Weingartner.Exceptional.Reactive
@@ -56,6 +58,11 @@ namespace Weingartner.Exceptional.Reactive
                 .Select(v => v.Flatten().Observable)
                 .Switch()
                 .ToObservableExceptional();
+        }
+
+        public static IObservableExceptional<T> Concat<T>(this IEnumerable<IObservableExceptional<T>> os)
+        {
+            return os.Select(o => o.Observable).Concat().ToObservableExceptional();
         }
     }
 }
