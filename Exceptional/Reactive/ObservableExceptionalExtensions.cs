@@ -130,5 +130,9 @@ namespace Weingartner.Exceptional.Reactive
 
         }
 
+        public static IObservableExceptional<T> Merge<T>(this IEnumerable<IObservableExceptional<T>> list)
+        {
+            return list.Select(p => p.Observable).Merge().ToObservableExceptional();
+        }
     }
 }
