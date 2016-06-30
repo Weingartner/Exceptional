@@ -134,5 +134,11 @@ namespace Weingartner.Exceptional.Reactive
         {
             return list.Select(p => p.Observable).Merge().ToObservableExceptional();
         }
+
+        public static IObservableExceptional<T> TakeUntil<T, TOther>(this IObservableExceptional<T> o,
+            IObservableExceptional<TOther> other)
+        {
+            return o.Observable.TakeUntil(other.Observable).ToObservableExceptional();
+        }
     }
 }
