@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
+using LanguageExt;
 using Weingartner.Exceptional.Async;
+using Unit = System.Reactive.Unit;
+using static LanguageExt.Prelude;
 
 namespace Weingartner.Exceptional.Reactive
 {
@@ -139,6 +141,19 @@ namespace Weingartner.Exceptional.Reactive
             IObservableExceptional<TOther> other)
         {
             return o.Observable.TakeUntil(other.Observable).ToObservableExceptional();
+        }
+
+        public static IObservableExceptional<T> OfType<T>(this IObservableExceptional<object> o)
+        {
+            return o.Observable
+                .Select(x => x.As<T>())
+                .WhereIsSome()
+                .ToObservableExceptional();
+        }
+
+        private static IObservable<T> WhereIsSome<T>(this IObservable<Option<T>> q)
+        {
+            return q.SelectMany(o => o.MatchObservable(Observable.Return<T>, Observable.Empty<T>));
         }
     }
 }

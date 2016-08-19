@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace Weingartner.Exceptional
 {
@@ -54,6 +56,24 @@ namespace Weingartner.Exceptional
 
             return new Exceptional<IReadOnlyList<T>>(list.Select(v => fn(v.Value)).ToList());
 
+        }
+
+        public static Option<IExceptional<T>> As<T>(this IExceptional<object> x)
+        {
+            return x.Match(
+                o => x.Value is T ? Some(Exceptional.Ok((T)x.Value)) : None,
+                e => Some(Exceptional.Fail<T>(x.Exception))
+                );
+        }
+
+        public static TOut Match<TIn, TOut>(
+            this IExceptional<TIn> x,
+            Func<TIn, TOut> okFn,
+            Func<Exception, TOut> failFn)
+        {
+            if (x.HasException)
+                return failFn(x.Exception);
+            return okFn(x.Value);
         }
     }
 }

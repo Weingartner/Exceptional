@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using FluentAssertions;
@@ -300,6 +301,36 @@ namespace Weingartner.Exceptional.Spec
             elist.Select(m=>m.Message).Should().BeEquivalentTo("111", "One or more errors occurred.", "111");
         }
 
+        [Fact]
+        public void OfTypeShouldWork()
+        {
+            var obs = Observable.Create<IExceptional<A>>(observer =>
+            {
+                observer.OnNext(Exceptional.Ok<A>(new C()));
+                observer.OnNext(Exceptional.Fail<C>("error"));
+                observer.OnNext(Exceptional.Ok<A>(new B()));
+                observer.OnNext(Exceptional.Fail<B>("error"));
+                observer.OnCompleted();
 
+                return Disposable.Empty;
+            })
+            .ToObservableExceptional();
+
+            var items = obs.OfType<C>().Observable.ToEnumerable().ToList();
+            items.Count.Should().Be(3);
+            items[0].HasException.Should().BeFalse();
+            items[1].HasException.Should().BeTrue();
+            items[2].HasException.Should().BeTrue();
+        }
+
+        private abstract class A
+        {
+        }
+        private class B : A
+        {
+        }
+        private class C : A
+        {
+        }
     }
 }
