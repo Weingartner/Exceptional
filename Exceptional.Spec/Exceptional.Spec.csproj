@@ -98,13 +98,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Exceptional\Exceptional.csproj">
-      <Project>{c2c8a510-b4f9-4140-bd6f-fab3605b9afe}</Project>
-      <Name>Exceptional</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Weingartner.Exceptional.ReactiveUI\Weingartner.Exceptional.ReactiveUI.csproj">
+      <Project>{a31e2631-76f3-4dc5-8cce-b88ef04552e0}</Project>
+      <Name>Weingartner.Exceptional.ReactiveUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weingartner.Exceptional\Weingartner.Exceptional.csproj">
+      <Project>{c2c8a510-b4f9-4140-bd6f-fab3605b9afe}</Project>
+      <Name>Weingartner.Exceptional</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

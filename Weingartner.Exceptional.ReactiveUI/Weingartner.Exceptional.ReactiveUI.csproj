@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>Weingartner.Exceptional.ReactiveUI</PackageId>
+    <Title>Provides Exceptional support for ReactiveUI</Title>
+    <Copyright>Weingartner Machinen bau 2017</Copyright>
+    <LicenseUrl>https://opensource.org/licenses/MIT</LicenseUrl>
+    <ProjectUrl>https://github.com/Weingartner/Exceptional</ProjectUrl>
+    <Authors>Brad Phelan</Authors>
+    <Description>Provide WhenAnyExceptional that passes errors through the IObservableExceptional
+      return value</Description>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -68,10 +80,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Weingartner.Exceptional, Version=1.2.6011.19372, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Weingartner.Exceptional.1.2.6011.19372\lib\net461\Weingartner.Exceptional.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Exceptional.ReactiveUI.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="WhenAnyExceptional.tt">
@@ -95,14 +102,23 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Weingartner.Exceptional\Weingartner.Exceptional.csproj">
+      <Project>{c2c8a510-b4f9-4140-bd6f-fab3605b9afe}</Project>
+      <Name>Weingartner.Exceptional</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)packages\PackProj.0.2.2\build\PackProj.targets" Condition="Exists('$(SolutionDir)packages\PackProj.0.2.2\build\PackProj.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)packages\PackProj.0.2.2\build\PackProj.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)packages\PackProj.0.2.2\build\PackProj.targets'))" />
+    <Error Condition="!Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props'))" />
+    <Error Condition="!Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets'))" />
+    <Error Condition="!Exists('..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets'))" />
   </Target>
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

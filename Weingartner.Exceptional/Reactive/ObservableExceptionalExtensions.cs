@@ -151,9 +151,25 @@ namespace Weingartner.Exceptional.Reactive
                 .ToObservableExceptional();
         }
 
+        /// <summary>
+        /// Flatten the IObservableExceptional of IEnumerable of T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IObservableExceptional<T> SelectMany<T>(this IObservableExceptional<IEnumerable<T>> source)
+        {
+            return source.Observable.SelectMany
+                         ( e => e.HasException
+                               ? new[] {Exceptional.Fail<T>( e.Exception )}
+                               : e.Value.Select( Exceptional.Ok ).ToArray() )
+                         .ToObservableExceptional();
+        }
+
         private static IObservable<T> WhereIsSome<T>(this IObservable<Option<T>> q)
         {
             return q.SelectMany(o => o.MatchObservable(Observable.Return<T>, Observable.Empty<T>));
         }
+
     }
 }
