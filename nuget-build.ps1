@@ -1,28 +1,13 @@
 param([string]$apikey) 
 
-function push {
-    param ([string]$proj, [string]$config)
-
-    $csproj = "$proj\$proj.csproj"
-
-    Write-Host "PACKING NOW $csproj $config" -foregroundcolor Blue
-    $cmd = "nuget pack $csproj -Prop Platform=AnyCPU -Prop Configuration=$config -symbols"
-
-    # parse the output from nuget packaging command
-    echo $cmd
-    iex $cmd  | Tee-Object -Variable output
-
-    $a = echo $output |  Select-String nupkg | Select-String -NotMatch symbols.nupkg
-    $a = $a -Replace "^[^']*'", ""
-    $a = $a -Replace "'[^']*$", ""
-
-
-    write-host "PUSHING NOW $csproj $config" -ForegroundColor Blue
-    $cmd = "nuget push $a $apikey -Source https://www.nuget.org/api/v2/package/" 
-    echo $cmd
-    iex $cmd
-
+# Remove any old nuget packages
+gci -r -include bin, obj | rm -rec -fo
+# Build new nuget packages
+msbuild Exceptional.sln /t:Weingartner_Exceptional:Pack /t:Weingartner_Exceptional_ReactiveUI:Pack /p:Configuration=Release
+# Get all nuget packages under the specific folders
+$packages = gci -r -include *.nupkg -path Weingartner.Exceptional,Weingartner.Exceptional.ReactiveUI
+# Publish them all
+foreach ($package in $packages) {
+    & "C:\Program Files\dotnet\dotnet.exe" nuget push $package
 }
 
-push "Exceptional" "Release"
-push "Exceptional.ReactiveUI" "Release"
