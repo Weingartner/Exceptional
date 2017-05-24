@@ -1,11 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using Weingartner.Exceptional;
 using System.Reactive.Linq;
-using System.Reactive;
 
-namespace Weingartner.Exceptional.Reactive {
+namespace Weingartner.Reactive {
     public static partial class ObservableExceptional {
 
     

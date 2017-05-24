@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using Weingartner.Exceptional;
+using Weingartner;
 
-namespace Weingartner.Exceptional {
+namespace Weingartner {
     public  static partial class Exceptional {
 
     

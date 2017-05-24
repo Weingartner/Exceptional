@@ -1,6 +1,6 @@
 using System;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public interface IObserverExceptional<in T>
     {

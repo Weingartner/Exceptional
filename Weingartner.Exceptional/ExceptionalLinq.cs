@@ -1,6 +1,6 @@
 using System;
 
-namespace Weingartner.Exceptional
+namespace Weingartner
 {
     public static class ExceptionalLinq
     {

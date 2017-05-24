@@ -1,7 +1,7 @@
 using System;
 using System.Reactive.Subjects;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     internal class ConnectableObservableExceptional<T> : ObservableExceptional<T>, IConnectableObservableExceptional<T>
     {

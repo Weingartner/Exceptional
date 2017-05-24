@@ -1,4 +1,4 @@
-﻿namespace Weingartner.Exceptional
+﻿namespace Weingartner
 {
 
     using System;

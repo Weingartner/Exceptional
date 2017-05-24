@@ -1,12 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using Weingartner.Exceptional;
 using System.Linq.Expressions;
 using ReactiveUI;
-using Weingartner.Exceptional.Reactive;
+using Weingartner.Reactive;
 
-namespace Weingartner.Exceptional.Reactive {
+namespace Weingartner.Reactive {
     public  static partial class ReactiveUI {
 
 

@@ -5,9 +5,9 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Weingartner.Exceptional.Async;
+using Weingartner.Async;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public static partial class ObservableExceptional
     {

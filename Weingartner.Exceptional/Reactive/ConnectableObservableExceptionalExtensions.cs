@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public static class ConnectableObservableExceptionalExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public static class ObserverExceptional
     {

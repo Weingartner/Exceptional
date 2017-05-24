@@ -1,6 +1,6 @@
 using System.Reactive.Subjects;
 
-namespace Weingartner.Exceptional.Reactive.Subject
+namespace Weingartner.Reactive.Subject
 {
     public class BehaviorSubjectExceptional<T> : SubjectExceptionalBase<T>
     {

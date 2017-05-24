@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Weingartner.Exceptional.Spec
+namespace Weingartner.Spec
 {
     public class ExceptionalSpec
     {
@@ -93,8 +93,8 @@ namespace Weingartner.Exceptional.Spec
         [Fact]
         public void SelectManyIsExceptionSafe()
         {
-            var xa = Exceptional.Success(1);
-            var xb = Exceptional.Success(2);
+            var xa = Exceptional.Ok(1);
+            var xb = Exceptional.Ok(2);
 
             Func<double, double, double> fn = (a, b) =>
             {
@@ -120,8 +120,8 @@ namespace Weingartner.Exceptional.Spec
         [Fact]
         public void SelectIsExceptionSafe()
         {
-            var xa = Exceptional.Success(1);
-            var xb = Exceptional.Success(2);
+            var xa = Exceptional.Ok(1);
+            var xb = Exceptional.Ok(2);
 
             Func<double, double, double> fn = (a, b) =>
             {

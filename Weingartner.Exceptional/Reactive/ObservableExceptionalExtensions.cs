@@ -6,11 +6,11 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using LanguageExt;
-using Weingartner.Exceptional.Async;
+using Weingartner.Async;
 using Unit = System.Reactive.Unit;
 using static LanguageExt.Prelude;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public static class ObservableExceptionalExtensions
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Reactive.Subjects;
 
-namespace Weingartner.Exceptional.Reactive.Subject
+namespace Weingartner.Reactive.Subject
 {
     public abstract class SubjectExceptionalBase<T> : ISubjectExceptional<T>
     {

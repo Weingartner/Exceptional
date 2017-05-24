@@ -19,7 +19,7 @@
     <ProjectGuid>{A31E2631-76F3-4DC5-8CCE-B88EF04552E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Weingartner.Exceptional.ReactiveUI</RootNamespace>
+    <RootNamespace>Weingartner.Reactive</RootNamespace>
     <AssemblyName>Weingartner.Exceptional.ReactiveUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

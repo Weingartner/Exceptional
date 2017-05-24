@@ -1,7 +1,7 @@
 using System;
 using System.Reactive.Linq;
 
-namespace Weingartner.Exceptional.Reactive
+namespace Weingartner.Reactive
 {
     public static class ObservableExceptionalLinq
     {

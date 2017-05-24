@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Weingartner.Exceptional.Async
+namespace Weingartner.Async
 {
     public static class TaskExtensions
     {
@@ -12,7 +12,7 @@ namespace Weingartner.Exceptional.Async
         {
             try
             {
-                return Weingartner.Exceptional.Exceptional.Ok(await task);
+                return Weingartner.Exceptional.Ok(await task);
             }
             catch (Exception e)
             {

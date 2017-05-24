@@ -6,11 +6,11 @@ using System.Reactive.Linq;
 using System.Threading;
 using FluentAssertions;
 using ReactiveUI;
-using Weingartner.Exceptional.Reactive;
-using Weingartner.Exceptional.Reactive.Subject;
+using Weingartner.Reactive;
+using Weingartner.Reactive.Subject;
 using Xunit;
 
-namespace Weingartner.Exceptional.Spec
+namespace Weingartner.Spec
 {
 
 

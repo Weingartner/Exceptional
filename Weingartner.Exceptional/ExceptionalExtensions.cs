@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
-namespace Weingartner.Exceptional
+namespace Weingartner
 {
     public static class ExceptionalExtensions
     {
