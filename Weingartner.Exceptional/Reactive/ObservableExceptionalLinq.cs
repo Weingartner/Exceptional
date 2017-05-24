@@ -29,7 +29,7 @@ namespace Weingartner.Reactive
 
         }
 
-        public static IObservableExceptional<V> SelectMany<T, U, V>(this IObservableExceptional<T> o, Func<T, IObservableExceptional<U>> fn0, Func<T, U, V> fn1)
+        public static IObservableExceptional<TV> SelectMany<T, TU, TV>(this IObservableExceptional<T> o, Func<T, IObservableExceptional<TU>> fn0, Func<T, TU, TV> fn1)
         {
             if (o == null)
                 throw new ArgumentNullException(nameof(o));

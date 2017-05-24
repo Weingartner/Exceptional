@@ -2,7 +2,6 @@
 {
 
     using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     // From http://stackoverflow.com/questions/10772727/exception-or-either-monad-in-c-sharp
@@ -55,7 +54,7 @@
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
                 return false;
             return Equals((Exceptional<T>) obj);
         }
@@ -81,9 +80,9 @@
             return !Equals(left, right);
         }
 
-        public bool HasException { get; private set; }
-        public Exception Exception { get; private set; }
-        private readonly T _Value = default(T);
+        public bool HasException { get; }
+        public Exception Exception { get; }
+        private readonly T _Value;
         public T Value
         {
             get
@@ -126,12 +125,12 @@
         // Returns the exception message if it exists or an empty string
         public string ToMessage()
         {
-            return this.HasException ? Exception.Message : "";
+            return HasException ? Exception.Message : "";
         }
 
         public override string ToString()
         {
-            return (this.HasException ? Exception.GetType().Name : ((Value != null) ? Value.ToString() : "null"));
+            return (HasException ? Exception.GetType().Name : ((Value != null) ? Value.ToString() : "null"));
         }
 
 
@@ -154,26 +153,26 @@
             return getValue.ToExceptional();
         }
 
-        public static IExceptional<T> Execute<U0, T>(Func<U0, T> fn, U0 u0)
+        public static IExceptional<T> Execute<TU0, T>(Func<TU0, T> fn, TU0 u0)
         {
-            return Exceptional.Execute(() => fn(u0));
+            return Execute(() => fn(u0));
         }
 
-        public static IExceptional<T> Execute<U0, U1, T>(Func<U0, U1, T> fn, U0 u0, U1 u1)
+        public static IExceptional<T> Execute<TU0, TU1, T>(Func<TU0, TU1, T> fn, TU0 u0, TU1 u1)
         {
-            return Exceptional.Execute(() => fn(u0, u1));
+            return Execute(() => fn(u0, u1));
         }
-        public static IExceptional<T> Execute<U0, U1, U2, T>(Func<U0, U1, U2, T> fn, U0 u0, U1 u1, U2 u2)
+        public static IExceptional<T> Execute<TU0, TU1, TU2, T>(Func<TU0, TU1, TU2, T> fn, TU0 u0, TU1 u1, TU2 u2)
         {
-            return Exceptional.Execute(() => fn(u0, u1, u2));
+            return Execute(() => fn(u0, u1, u2));
         }
-        public static IExceptional<T> Execute<U0, U1, U2, U3, T>(Func<U0, U1, U2, U3, T> fn, U0 u0, U1 u1, U2 u2, U3 u3)
+        public static IExceptional<T> Execute<TU0, TU1, TU2, TU3, T>(Func<TU0, TU1, TU2, TU3, T> fn, TU0 u0, TU1 u1, TU2 u2, TU3 u3)
         {
-            return Exceptional.Execute(() => fn(u0, u1, u2, u3));
+            return Execute(() => fn(u0, u1, u2, u3));
         }
-        public static IExceptional<T> Execute<U0, U1, U2, U3, U4, T>(Func<U0, U1, U2, U3, U4, T> fn, U0 u0, U1 u1, U2 u2, U3 u3, U4 u4)
+        public static IExceptional<T> Execute<TU0, TU1, TU2, TU3, TU4, T>(Func<TU0, TU1, TU2, TU3, TU4, T> fn, TU0 u0, TU1 u1, TU2 u2, TU3 u3, TU4 u4)
         {
-            return Exceptional.Execute(() => fn(u0, u1, u2, u3, u4));
+            return Execute(() => fn(u0, u1, u2, u3, u4));
         }
     }
 }

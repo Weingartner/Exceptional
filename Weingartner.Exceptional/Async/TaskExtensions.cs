@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Weingartner.Async
@@ -12,7 +9,7 @@ namespace Weingartner.Async
         {
             try
             {
-                return Weingartner.Exceptional.Ok(await task);
+                return Exceptional.Ok(await task);
             }
             catch (Exception e)
             {

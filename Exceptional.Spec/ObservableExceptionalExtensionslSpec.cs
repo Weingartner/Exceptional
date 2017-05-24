@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading;
 using FluentAssertions;
 using ReactiveUI;
 using Weingartner.Reactive;
@@ -19,22 +18,22 @@ namespace Weingartner.Spec
         int _A;
         public int A 
         {
-            get { return _A; }
-            set { this.RaiseAndSetIfChanged(ref _A, value); }
+            get => _A;
+            set => this.RaiseAndSetIfChanged(ref _A, value);
         }
 
         int _B;
         public int B 
         {
-            get { return _B; }
-            set { this.RaiseAndSetIfChanged(ref _B, value); }
+            get => _B;
+            set => this.RaiseAndSetIfChanged(ref _B, value);
         }
 
         int _C;
         public int C 
         {
-            get { return _C; }
-            set { this.RaiseAndSetIfChanged(ref _C, value); }
+            get => _C;
+            set => this.RaiseAndSetIfChanged(ref _C, value);
         }
         
     }
@@ -50,12 +49,10 @@ namespace Weingartner.Spec
             var list = new List<double>();
             var errors = new List<Exception>();
 
-            int count=0;
             numbers
                 .WhenAnyValue(p => p.A, p => p.B, Tuple.Create)
                 .ToObservableExceptional()
                 .Select(v => v.Item1/v.Item2)
-                .Do(_=>count++)
                 .Subscribe(onNext: val=>list.Add(val), onError:err=>errors.Add(err));
 
 
@@ -75,7 +72,7 @@ namespace Weingartner.Spec
         }
 
         [Fact]
-        public void LINQCanBeFun()
+        public void LinqCanBeFun()
         {
             var numbers = new Numbers();
 
@@ -102,9 +99,7 @@ namespace Weingartner.Spec
                 from c in oc
                 select (a+b)/c;
 
-            int count=0;
             or
-                .Do(_=>count++)
                 .Subscribe(onNext: val => list.Add(val), onError: err => errors.Add(err));
 
             list.Count.Should().Be(0);
@@ -129,7 +124,7 @@ namespace Weingartner.Spec
 
         #region these two tests should model similar behaviour
         [Fact]
-        public void LINQExceptionalCanBeFunReference()
+        public void LinqExceptionalCanBeFunReference()
         {
             var numbers = new Numbers();
 
@@ -156,9 +151,7 @@ namespace Weingartner.Spec
                 from c in oc
                 select new {a,b,c};
 
-            int count=0;
             or
-                .Do(_=>count++)
                 .Subscribe(onNext: val => list.Add(val), onError: err => errors.Add(err));
 
             list.Count.Should().Be(1);
@@ -174,10 +167,12 @@ namespace Weingartner.Spec
             numbers.C = 3;
             list.Count.Should().Be(8);
 
+            errors.Count.Should().Be( 0 );
+
         }
 
         [Fact]
-        public void LINQCanBeFunReference()
+        public void LinqCanBeFunReference()
         {
             var numbers = new Numbers();
 
@@ -201,9 +196,7 @@ namespace Weingartner.Spec
                 from c in oc
                 select new {a,b,c};
 
-            int count=0;
             or
-                .Do(_=>count++)
                 .Subscribe(onNext: val => list.Add(val), onError: err => errors.Add(err));
 
             list.Count.Should().Be(1);
@@ -218,6 +211,8 @@ namespace Weingartner.Spec
 
             numbers.C = 3;
             list.Count.Should().Be(8);
+
+            errors.Count.Should().Be( 0 );
 
         }
         #endregion
@@ -267,7 +262,7 @@ namespace Weingartner.Spec
             var s0 = new BehaviorSubjectExceptional<int>(0);
             var s1 = new BehaviorSubjectExceptional<int>(1);
 
-            var s3 = ObservableExceptional.CombineLatest(s0, s1, (a, b) => Tuple.Create(a, b));
+            var s3 = ObservableExceptional.CombineLatest(s0, s1, Tuple.Create);
 
 
             var list = new List<Tuple<int,int>>();

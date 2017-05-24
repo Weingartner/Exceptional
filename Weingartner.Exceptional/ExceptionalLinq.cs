@@ -19,28 +19,28 @@ namespace Weingartner
             return new Exceptional<T>(getValue);
         }
 
-        public static IExceptional<U> Select<T, U>(this IExceptional<T> value, Func<T, U> k)
+        public static IExceptional<TU> Select<T, TU>(this IExceptional<T> value, Func<T, TU> k)
         {
             return (value.HasException)
-                ? new Exceptional<U>(value.Exception)
+                ? new Exceptional<TU>(value.Exception)
                 : Exceptional.Execute(k, value.Value);
         }
 
-        public static IExceptional<U> SelectMany<T, U>(this IExceptional<T> value, Func<T, IExceptional<U>> k)
+        public static IExceptional<TU> SelectMany<T, TU>(this IExceptional<T> value, Func<T, IExceptional<TU>> k)
         {
-            if (value.HasException) return new Exceptional<U>(value.Exception);
+            if (value.HasException) return new Exceptional<TU>(value.Exception);
             else
             {
                 var exceptional = Exceptional.Execute(k, value.Value);
 
                 if (exceptional.HasException)
-                    return new Exceptional<U>(exceptional.Exception);
+                    return new Exceptional<TU>(exceptional.Exception);
 
                 return exceptional.Value;
             }
         }
 
-        public static IExceptional<V> SelectMany<T, U, V>(this IExceptional<T> value, Func<T, IExceptional<U>> k, Func<T, U, V> m)
+        public static IExceptional<TV> SelectMany<T, TU, TV>(this IExceptional<T> value, Func<T, IExceptional<TU>> k, Func<T, TU, TV> m)
         {
             return value.SelectMany(t => k(t).SelectMany(u => m(t, u).ToExceptional()));
         }

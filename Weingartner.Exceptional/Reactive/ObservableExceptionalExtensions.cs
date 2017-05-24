@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using LanguageExt;
 using Weingartner.Async;
 using Unit = System.Reactive.Unit;
-using static LanguageExt.Prelude;
 
 namespace Weingartner.Reactive
 {
@@ -168,7 +167,7 @@ namespace Weingartner.Reactive
 
         private static IObservable<T> WhereIsSome<T>(this IObservable<Option<T>> q)
         {
-            return q.SelectMany(o => o.MatchObservable(Observable.Return<T>, Observable.Empty<T>));
+            return q.SelectMany(o => o.MatchObservable(Observable.Return, Observable.Empty<T>));
         }
 
     }

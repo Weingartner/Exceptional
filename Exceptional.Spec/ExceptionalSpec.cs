@@ -31,6 +31,7 @@ namespace Weingartner.Spec
             var va = r.Exception as AggregateException;
 
             va.Should().NotBeNull();
+            // ReSharper disable once PossibleNullReferenceException
             va.InnerExceptions.Count.Should().Be(2);
             va.InnerExceptions.Should().Contain(b.Exception);
             va.InnerExceptions.Should().Contain(c.Exception);
@@ -43,7 +44,7 @@ namespace Weingartner.Spec
             var b = 2.ToExceptional();
 
             var e = new Exception("AAA");
-            var r = Exceptional.Combine<int, int, int>(a, b, (x, y) => { throw e; });
+            var r = Exceptional.Combine<int, int, int>(a, b, (x, y) => throw e );
 
             r.HasException.Should().BeTrue();
             r.Exception.Should().Be(e);
@@ -51,7 +52,7 @@ namespace Weingartner.Spec
         }
 
         [Fact]
-        public void LINQHappyPathShouldWork()
+        public void LinqHappyPathShouldWork()
         {
             var xa = Exceptional.Ok(1);
             var xb = Exceptional.Ok(2);
@@ -68,7 +69,7 @@ namespace Weingartner.Spec
 
         }
         [Fact]
-        public void LINQSadPathShouldWork()
+        public void LinqSadPathShouldWork()
         {
             var xa = Exceptional.Ok(1);
             var xb = Exceptional.Fail<int>(new Exception("foo"));
@@ -96,15 +97,12 @@ namespace Weingartner.Spec
             var xa = Exceptional.Ok(1);
             var xb = Exceptional.Ok(2);
 
-            Func<double, double, double> fn = (a, b) =>
-            {
-                throw new Exception("foo");
-            };
+            double Fn(double a, double b) => throw new Exception( "foo" );
 
             var xx =
                 from a in xa
                 from b in xb
-                select fn(a, b);
+                select Fn(a, b);
 
 
             xx.HasException.Should().BeTrue();
@@ -123,14 +121,11 @@ namespace Weingartner.Spec
             var xa = Exceptional.Ok(1);
             var xb = Exceptional.Ok(2);
 
-            Func<double, double, double> fn = (a, b) =>
-            {
-                throw new Exception("foo");
-            };
+            double Fn(double a, double b) => throw new Exception( "foo" );
 
             var xx =
                 from a in xa
-                select fn(a, 2);
+                select Fn(a, 2);
 
 
             xx.HasException.Should().BeTrue();

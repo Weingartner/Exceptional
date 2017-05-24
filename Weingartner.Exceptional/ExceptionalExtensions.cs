@@ -9,12 +9,12 @@ namespace Weingartner
 {
     public static class ExceptionalExtensions
     {
-        public static IExceptional<U> ThenExecute<T, U>(this IExceptional<T> value, Func<T, U> getValue)
+        public static IExceptional<TU> ThenExecute<T, TU>(this IExceptional<T> value, Func<T, TU> getValue)
         {
             return value.SelectMany(x => Exceptional.Execute(() => getValue(x)));
         }
 
-        public static IObservable<U> WithoutErrors<U>(this IObservable<IExceptional<U>> o)
+        public static IObservable<TU> WithoutErrors<TU>(this IObservable<IExceptional<TU>> o)
         {
             return o.Where(v => !v.HasException).Select(v => v.Value);
         }
@@ -40,12 +40,12 @@ namespace Weingartner
         /// If any of the internal exceptional have an error then the output exceptional is in error.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <typeparam name="U"></typeparam>
+        /// <typeparam name="TU"></typeparam>
         /// <param name="this"></param>
         /// <param name="fn"></param>
         /// <returns></returns>
-        public static IExceptional<IReadOnlyList<T>> AggregateExceptionals<T, U>
-            (this IEnumerable<IExceptional<U>> @this, Func<U, T> fn)
+        public static IExceptional<IReadOnlyList<T>> AggregateExceptionals<T, TU>
+            (this IEnumerable<IExceptional<TU>> @this, Func<TU, T> fn)
         {
             var list = @this.ToList();
             var exceptions = list.Where(v => v.HasException).Select(v => v.Exception).ToList();

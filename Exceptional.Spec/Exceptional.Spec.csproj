@@ -7,7 +7,7 @@
     <ProjectGuid>{AD341B78-7F03-44D3-BF88-4BABA2B5469D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Weingartner.Exceptional.Spec</RootNamespace>
+    <RootNamespace>Weingartner.Spec</RootNamespace>
     <AssemblyName>Weingartner.Exceptional.Spec</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
