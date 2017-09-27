@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Weingartner;
 
 namespace Weingartner {
     public  static partial class Exceptional {
@@ -762,3 +760,4 @@ namespace Weingartner {
 
     }
 }
+

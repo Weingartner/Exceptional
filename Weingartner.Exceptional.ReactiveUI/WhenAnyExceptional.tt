@@ -12,6 +12,7 @@ using Weingartner.Exceptional;
 using System.Linq.Expressions;
 using ReactiveUI;
 using Weingartner.Exceptional.Reactive;
+using Exceptional = Weingartner.Exceptional.Exceptional;
 
 namespace Weingartner.Reactive {
     public  static partial class ReactiveUI {

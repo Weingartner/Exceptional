@@ -1,141 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <PackageId>Weingartner.Exceptional</PackageId>
-    <Title>A LINQ/RX compatible object that can contain either a value or an exception</Title>
-    <Copyright>Weingartner Machinen bau 2017</Copyright>
-    <LicenseUrl>https://opensource.org/licenses/MIT</LicenseUrl>
-    <ProjectUrl>https://github.com/Weingartner/Exceptional</ProjectUrl>
-    <Authors>Brad Phelan</Authors>
-    <Description>A LINQ/RX compatible object that can contain either a value or an exception</Description>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C2C8A510-B4F9-4140-BD6F-FAB3605B9AFE}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Weingartner</RootNamespace>
-    <AssemblyName>Weingartner.Exceptional</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+      <PackageId>Weingartner.Exceptional</PackageId>
+      <Title>Weingartner.Exceptional</Title>
+      <PackageVersion>1.7.0</PackageVersion>
+      <Description>Provide error handling for reactive and non reactive coding</Description>
+      <Copyright>Copyright ©2017 Weingartner Machinenbau</Copyright>
+      <authors>Brad Phelan</authors>
+      <LicenseUrl>https://opensource.org/licenses/MIT</LicenseUrl>
+      <RepositoryUrl>https://github.com/Weingartner/I18N.Reactive</RepositoryUrl>
+      <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+      <RootNamespace>Weingartner</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="LanguageExt.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\LanguageExt.Core.1.7.38\lib\net46\LanguageExt.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+      <PackageReference Include="LanguageExt.Core" Version="1.7.38" />
+      <PackageReference Include="Rx-Core" Version="2.2.5" />
+      <PackageReference Include="Rx-Interfaces" Version="2.2.5" />
+      <PackageReference Include="Rx-Linq" Version="2.2.5" />
+      <PackageReference Include="Rx-Main" Version="2.2.5" />
+      <PackageReference Include="Rx-PlatformServices" Version="2.2.5" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Async\TaskExtensions.cs" />
-    <Compile Include="Exceptional.Combine.generated.cs">
-      <AutoGen>True</AutoGen>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Exceptional.Combine.generated.cs">
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Exceptional.Combine.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Exceptional.Combine.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Exceptional.Combine.tt</DependentUpon>
     </Compile>
-    <Compile Include="Exceptional.cs" />
-    <Compile Include="ExceptionalExtensions.cs" />
-    <Compile Include="ExceptionalLinq.cs" />
-    <Compile Include="IExceptional.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reactive\ConnectableObservableExceptional.cs" />
-    <Compile Include="Reactive\ConnectableObservableExceptionalExtensions.cs" />
-    <Compile Include="Reactive\ObservableExceptional.CombineLatest.generated.cs">
-      <DependentUpon>ObservableExceptional.CombineLatest.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Reactive\IConnectableObservableExceptional.cs" />
-    <Compile Include="Reactive\IObservableExceptional.cs" />
-    <Compile Include="Reactive\IObserverExceptional.cs" />
-    <Compile Include="Reactive\ObservableExceptional.cs" />
-    <Compile Include="Reactive\ObservableExceptionalExtensions.cs" />
-    <Compile Include="Reactive\ObservableExceptionalLinq.cs" />
-    <Compile Include="Reactive\ObserverExceptional.cs" />
-    <Compile Include="Reactive\Subject\BehaviorSubjectExceptional.cs" />
-    <Compile Include="Reactive\Subject\ISubjectExceptional.cs" />
-    <Compile Include="Reactive\Subject\SubjectExceptional.cs" />
-    <Compile Include="Reactive\Subject\SubjectExceptionalBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Exceptional.Combine.tt">
+    <None Update="Exceptional.Combine.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Exceptional.Combine.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Reactive\ObservableExceptional.CombineLatest.tt">
+    </None>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Reactive\ObservableExceptional.CombineLatest.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObservableExceptional.CombineLatest.tt</DependentUpon>
+    </Compile>
+
+    <None Update="Reactive\ObservableExceptional.CombineLatest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObservableExceptional.CombineLatest.generated.cs</LastGenOutput>
-    </Content>
+    </None>
+
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.props'))" />
-    <Error Condition="!Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets'))" />
-    <Error Condition="!Exists('..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets'))" />
-  </Target>
-  <Import Project="..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.248\build\NuGet.Build.Packaging.targets')" />
-  <Import Project="..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.4.0.0-beta0011\build\GitVersionTask.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+
 </Project>
+
+
+

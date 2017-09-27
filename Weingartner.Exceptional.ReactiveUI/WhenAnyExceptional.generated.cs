@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using ReactiveUI;
-using Weingartner.Reactive;
+using Exceptional = Weingartner.Exceptional;
 
 namespace Weingartner.Reactive {
     public  static partial class ReactiveUI {

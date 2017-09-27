@@ -1,9 +1,8 @@
-﻿namespace Weingartner
+﻿using System;
+using System.Collections.Generic;
+
+namespace Weingartner
 {
-
-    using System;
-    using System.Collections.Generic;
-
     // From http://stackoverflow.com/questions/10772727/exception-or-either-monad-in-c-sharp
     public class ExceptionalBase
     {

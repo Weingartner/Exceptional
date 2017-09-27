@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using LanguageExt;
-using static LanguageExt.Prelude;
 
 namespace Weingartner
 {
@@ -61,8 +60,8 @@ namespace Weingartner
         public static Option<IExceptional<T>> As<T>(this IExceptional<object> x)
         {
             return x.Match(
-                o => x.Value is T ? Some(Exceptional.Ok((T)x.Value)) : None,
-                e => Some(Exceptional.Fail<T>(x.Exception))
+                o => x.Value is T ? Prelude.Some(Exceptional.Ok((T)x.Value)) : Prelude.None,
+                e => Prelude.Some(Exceptional.Fail<T>(x.Exception))
                 );
         }
 
