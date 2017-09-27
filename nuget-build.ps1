@@ -5,7 +5,7 @@ param([string]$apikey)
 gci -r -include bin, obj | rm -rec -fo
 # Build new nuget packages
 dotnet restore
-dotnet pack --configuration Release
+dotnet pack /p:Version=$(gitversion /output json /showvariable SemVer) --configuration Release
 # Get all nuget packages under the specific folders
 $packages = gci -r -include *.nupkg -path Weingartner.Exceptional,Weingartner.Exceptional.ReactiveUI
 # Publish them all

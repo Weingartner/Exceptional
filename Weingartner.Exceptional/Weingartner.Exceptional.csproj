@@ -8,7 +8,6 @@
   <PropertyGroup>
       <PackageId>Weingartner.Exceptional</PackageId>
       <Title>Weingartner.Exceptional</Title>
-      <PackageVersion>1.7.0</PackageVersion>
       <Description>Provide error handling for reactive and non reactive coding</Description>
       <Copyright>Copyright ©2017 Weingartner Machinenbau</Copyright>
       <authors>Brad Phelan</authors>
